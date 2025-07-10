@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo "===== SinaGoga v1.0 Установщик ====="
-read -sp "Введите пароль для доступа: " pass
-echo
+echo "Введите пароль для установки SinaGoga v1.0:"
+read -s USER_PASS
+
+if [ "$USER_PASS" != "qwerty" ]; then
+    echo "❌ Неверный пароль. Доступ запрещён."
+    exit 1
+fi
 
 # Получаем реальный пароль с GitHub
 realpass=$(curl -s https://raw.githubusercontent.com/everett1091/SinaGoga/main/auth.txt)
