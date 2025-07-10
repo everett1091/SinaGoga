@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "===== SinaGoga v1.0 Установщик ====="
+read -sp "Введите пароль для доступа: " pass
+echo
+
+# Получаем реальный пароль с GitHub
+realpass=$(curl -s https://raw.githubusercontent.com/everett1091/SinaGoga/main/auth.txt)
+
+if [[ "$pass" != "$realpass" ]]; then
+  echo "❌ Неверный пароль. Доступ запрещён."
+  exit 1
+fi
+
+echo "✅ Пароль принят. Загружаем прошивку..."
+wget -O sinagoga.tar.gz https://raw.githubusercontent.com/everett1091/SinaGoga/main/sinagoga.tar.gz
+
+echo "📦 Распаковываем архив..."
+tar -xzf sinagoga.tar.gz
+cd sinagoga
+
+echo "⚙️ Запускаем установку..."
+chmod +x install.sh
+./install.sh
