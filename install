@@ -1,8 +1,8 @@
 echo "Введите пароль для установки SinaGoga v1.0:"
 read -s USER_PASS
 
-# Получаем реальный пароль с GitHub
-realpass=$(curl -s https://raw.githubusercontent.com/everett1091/SinaGoga/main/auth.txt)
+# Получаем реальный пароль и обрезаем лишние пробелы/переводы строк
+realpass=$(curl -s https://raw.githubusercontent.com/everett1091/SinaGoga/main/auth.txt | tr -d '\r\n')
 
 if [[ "$USER_PASS" != "$realpass" ]]; then
   echo "❌ Неверный пароль. Доступ запрещён."
